@@ -9,16 +9,17 @@ The reproduction lives under `foo=bar-baz/` so the workspace root contains `=`. 
 without such a character does not reproduce — the import surfaces as
 `Cannot find module './Child.vue.ts'` (TS2307) instead.
 
-## Prerequisite
-
-Type checking must be reachable: the vize server must resolve a Corsa / `tsgo` runtime
-(`@typescript/native-preview`) from the project, a global install, or `TSGO_PATH`. Without
-it nothing is written and you get a `typecheck-unavailable` diagnostic.
-
 ## Steps
 
-1. Open the `foo=bar-baz/` folder in VS Code with the `ubugeeei.vize` extension (typecheck on).
-2. Open `src/Parent.vue`.
+1. `cd foo=bar-baz && pnpm install` — installs `@typescript/native-preview` (the Corsa /
+   `tsgo` runtime the vize type checker needs). Without a reachable runtime nothing is
+   written and you get a `typecheck-unavailable` diagnostic instead. The version is pinned:
+   the bug itself is runtime-independent, but vize 0.239.0's Corsa protocol rejects newer
+   `tsgo` dev builds (e.g. `7.0.0-dev.20260618.1` fails the handshake with
+   `invalid type: integer, expected a string`), so a compatible build is required for Corsa
+   to start at all.
+2. Open the `foo=bar-baz/` folder in VS Code with the `ubugeeei.vize` extension (typecheck on).
+3. Open `src/Parent.vue`.
 
 ## Expected
 

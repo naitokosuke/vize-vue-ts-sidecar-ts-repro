@@ -1,0 +1,14 @@
+{
+  "name": "vize-vue-ts-sidecar-ts-repro",
+  "private": true,
+  "devDependencies": {
+    "@typescript/native-preview": "7.0.0-dev.20260602.1"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "11.8.0",
+      "onFail": "download"
+    }
+  }
+}
